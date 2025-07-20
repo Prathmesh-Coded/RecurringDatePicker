@@ -10,11 +10,7 @@ describe("DatePickerUI Integration", () => {
   it("should allow user to configure a weekly recurring event and preview generated dates", async () => {
     render(<DatePickerUI />);
 
-    // Select a start date (assume today is 2024-01-01 for test stability)
-    // You may need to mock Date.now or the calendar component for full control
-    // For now, we assume the default date is used
-
-    // Open the repeat dropdown and select 'Weekly'
+    // Opens the repeat dropdown and select 'Weekly'
     const repeatDropdown = screen.getByLabelText(/repeat/i);
     userEvent.click(repeatDropdown);
     const weeklyOption = await screen.findByText(/Weekly/i);
@@ -35,7 +31,6 @@ describe("DatePickerUI Integration", () => {
     await waitFor(() => {
       // The preview should show the generated dates
       const preview = screen.getByTestId("occurrence-preview");
-      console.log("Preview text:", preview.textContent); // <-- Print the preview text
       expect(preview).toBeInTheDocument();
       // Check that at least two dates are shown
       expect(preview.textContent).toMatch(/Monday/i);
